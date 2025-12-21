@@ -1,0 +1,45 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;    
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
+    box-sizing: border-box;
+}
+
+.login-card h2 {
+    margin: 0 0 18px;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #111827;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    content: "center";
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #374151;
+}

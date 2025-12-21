@@ -1,0 +1,71 @@
+/* Contenedor página */
+.dashboard-page {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;              /* espacio lateral para que los "márgenes" no toquen el borde */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+/* Título centrado y escalable */
+.dashboard-title {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: clamp(1.5rem, 2.4vw, 3.2rem);
+    margin: 0;
+}
+
+/* caja del buscador centrada */
+.dashboard-search input {
+    display: block;
+    margin: 12px auto;
+    padding: 10px 14px;
+    width: min(900px, 90%); /* toma hasta 90% o 900px */
+    font-size: 1.05rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-sizing: border-box;
+}
+
+/* Grid responsivo para las tarjetas: columnas adaptativas */
+.cards-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;                /* "márgenes" entre tarjetas que se extienden en toda la pantalla */
+    align-items: start;
+    box-sizing: border-box;
+    max-width: 1400px;        /* opcional: limita el ancho máximo del grid y centra con padding del body */
+}
+
+/* Estilo de cada tarjeta */
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+    box-sizing: border-box;
+    width: 100%;              /* importante para que ocupe toda la columna */
+}
+
+/* Tipografías internas */
+.card h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    font-family: Arial, sans-serif;
+}
+
+.card p {
+    margin-bottom: 0;
+    font-family: Arial, sans-serif;
+    color: #374151;
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 420px) {
+    .dashboard-page { padding: 12px; }
+    .cards-grid { gap: 12px; }
+    .card { padding: 14px; }
+}
