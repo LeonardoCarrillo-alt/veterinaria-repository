@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolvePackageJsonExports": false,
+    "target": "ES2023"
+  },
+  "ts-node": {
+    "esm": false,
+    "experimentalSpecifierResolution": "node",
+    "require": ["dotenv/config"]
+  }
+}
