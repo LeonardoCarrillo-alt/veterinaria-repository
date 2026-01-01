@@ -1,15 +1,13 @@
-/* Contenedor página */
 .dashboard-page {
     width: 100%;
     box-sizing: border-box;
-    padding: 24px;              /* espacio lateral para que los "márgenes" no toquen el borde */
+    padding: 24px;              
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: center;
 }
 
-/* Título centrado y escalable */
 .dashboard-title {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -17,40 +15,72 @@
     margin: 0;
 }
 
-/* caja del buscador centrada */
 .dashboard-search input {
     display: block;
     margin: 12px auto;
     padding: 10px 14px;
-    width: min(900px, 90%); /* toma hasta 90% o 900px */
+    width: min(900px, 90%); 
     font-size: 1.05rem;
     border-radius: 8px;
     border: 1px solid #e5e7eb;
     box-sizing: border-box;
 }
 
-/* Grid responsivo para las tarjetas: columnas adaptativas */
+.user-welcome {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.user-welcome h2 {
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+.user-welcome p {
+    color: #6c757d;
+    margin: 0 0 15px 0;
+    font-size: 1rem;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
 .cards-grid {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;                /* "márgenes" entre tarjetas que se extienden en toda la pantalla */
+    gap: 24px;                
     align-items: start;
     box-sizing: border-box;
-    max-width: 1400px;        /* opcional: limita el ancho máximo del grid y centra con padding del body */
+    max-width: 1400px;        
 }
 
-/* Estilo de cada tarjeta */
 .card {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(16,24,40,0.06);
     box-sizing: border-box;
-    width: 100%;              /* importante para que ocupe toda la columna */
+    width: 100%;              
 }
 
-/* Tipografías internas */
 .card h2 {
     margin-top: 0;
     font-size: 1.25rem;
@@ -63,7 +93,6 @@
     color: #374151;
 }
 
-/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 420px) {
     .dashboard-page { padding: 12px; }
     .cards-grid { gap: 12px; }

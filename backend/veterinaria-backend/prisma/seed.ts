@@ -3,9 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
 });
+const adapter = new PrismaPg(pool);
 
 const prisma = new PrismaClient({ adapter });
 async function main() {
@@ -22,7 +25,7 @@ async function main() {
     data: {
       email: 'admin@example.com',
       username: 'admin',
-      password: '$2b$10$TuHashSeguro', // En producción usa bcrypt
+      password: '$2b$10$TuHashSeguro',
       name: 'Administrador',
     },
   });

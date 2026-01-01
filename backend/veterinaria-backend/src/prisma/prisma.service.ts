@@ -1,33 +1,32 @@
-import { Injectable, OnModuleDestroy, Logger } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-
-const logger = new Logger('PrismaService');
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleDestroy {
-  private connected = false;
-
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   constructor() {
-    super();
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
+    const adapter = new PrismaPg(pool);
+
+    super({
+      adapter,
+      log: ['query', 'info', 'warn', 'error'],
+    });
   }
 
-  async onModuleInit(): Promise<void> {
-    const disabled = process.env.PRISMA_DISABLE === 'true';
-    if (disabled) {
-      logger.log('Prisma auto-connect disabled by PRISMA_DISABLE=true');
-      return;
-    }
-
-    try {
-      await this.$connect();
-      this.connected = true;
-      logger.log('Prisma connected to database.');
-    } catch (error) {
-      logger.error('Prisma connection failed: ' + (error as Error).message);
-    }
+  async onModuleInit() {
+    await this.$connect();
   }
 
   async onModuleDestroy() {
-    if (this.connected) await this.$disconnect();
+    await this.$disconnect();
   }
 }
