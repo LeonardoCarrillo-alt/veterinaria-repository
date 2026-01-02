@@ -1,5 +1,5 @@
-import { User } from 'src/users/domain/entities/user.entity';
-import { UserId } from 'src/users/domain/value-objects/user-id.vo';
+import { User } from 'src/modules/users/domain/entities/user.entity';
+import { UserId } from 'src/modules/users/domain/value-objects/user-id.vo';
 
 export interface UserRepositoryPort {
   save(user: User): Promise<User>;

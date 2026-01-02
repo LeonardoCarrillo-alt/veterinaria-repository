@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { User } from 'src/users/domain/entities/user.entity';
+import { User } from 'src/modules/users/domain/entities/user.entity';
 import {
   USER_REPOSITORY_PORT,
   UserRepositoryPort,
 } from '../ports/user.repository.port';
-import { UserId } from 'src/users/domain/value-objects/user-id.vo';
+import { UserId } from 'src/modules/users/domain/value-objects/user-id.vo';
 
 export interface GetUserDto {
   id: string;

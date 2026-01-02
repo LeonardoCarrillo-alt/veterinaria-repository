@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepositoryPort } from 'src/users/application/ports/user.repository.port';
-import { User } from 'src/users/domain/entities/user.entity';
-import { UserId } from 'src/users/domain/value-objects/user-id.vo';
-import { Email } from 'src/users/domain/value-objects/email.vo';
+import { UserRepositoryPort } from 'src/modules/users/application/ports/user.repository.port';
+import { User } from 'src/modules/users/domain/entities/user.entity';
+import { UserId } from 'src/modules/users/domain/value-objects/user-id.vo';
+import { Email } from 'src/modules/users/domain/value-objects/email.vo';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 interface PrismaUser {
