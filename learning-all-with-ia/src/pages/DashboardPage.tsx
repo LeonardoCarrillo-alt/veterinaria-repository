@@ -1,10 +1,19 @@
 import Dashboard from '../components/dashboard.tsx';
 import React from 'react';
 import Product from '../components/products.tsx';
+import backgroundImage from '../assets/images.png';
 
 function DashboardPage() {
     return (
-        <div >
+        <div style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundColor: '#07dee9',
+            backgroundSize: '50%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            minHeight: '100vh',
+            width: '100%'
+        }}>
             <Dashboard />
 
             <div>

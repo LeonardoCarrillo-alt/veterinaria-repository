@@ -1,3 +1,5 @@
+
+
 .dashboard-page {
     width: 100%;
     box-sizing: border-box;
@@ -68,13 +70,17 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;                
     align-items: start;
+    border-radius: 10px;
     box-sizing: border-box;
     max-width: 1400px;        
 }
 
-.card {
+.card:hover {
     background: #fff;
+    background-color: #04AA6D;
+    color: #07ec0f;
     padding: 20px;
+    transition-duration: 0.4s;
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(16,24,40,0.06);
     box-sizing: border-box;
