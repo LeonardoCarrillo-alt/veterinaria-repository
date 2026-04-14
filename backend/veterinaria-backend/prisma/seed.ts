@@ -4,6 +4,7 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
+import * as bcrypt from 'bcryptjs';
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -28,11 +29,14 @@ async function main() {
   }
 
   // Crear usuarios
+  const passwordAdmin = await bcrypt.hash('admin123', 10);
+  const passwordUser = await bcrypt.hash('user123', 10);
+
   const user1 = await prisma.user.create({
     data: {
       email: 'admin@example.com',
       username: 'admin',
-      password: '$2b$10$TuHashSeguro',
+      password: passwordAdmin,
       name: 'Administrador',
     },
   });
@@ -41,7 +45,7 @@ async function main() {
     data: {
       email: 'user@example.com',
       username: 'usuario',
-      password: '$2b$10$TuHashSeguro',
+      password: passwordUser,
       name: 'Usuario Normal',
     },
   });

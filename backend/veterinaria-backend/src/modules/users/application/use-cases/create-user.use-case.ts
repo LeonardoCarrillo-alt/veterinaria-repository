@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcryptjs';
 import { User } from 'src/modules/users/domain/entities/user.entity';
 import {
   USER_REPOSITORY_PORT,
@@ -24,11 +25,14 @@ export class CreateUserUseCase {
     if (existingUser) {
       throw new Error('email already exists');
     }
+
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+
     const user = User.create(
       new Email(dto.email),
       dto.username,
       dto.name,
-      dto.password,
+      hashedPassword,
     );
     const savedUser = await this.userRepository.save(user);
     return savedUser;

@@ -1,5 +1,6 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs';
 import {
   USER_REPOSITORY_PORT,
   UserRepositoryPort,
@@ -33,7 +34,12 @@ export class LoginUserUseCase {
     if (!user) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-    if (user.getPassword() !== dto.password) {
+
+    const isPasswordValid = await bcrypt.compare(
+      dto.password,
+      user.getPassword(),
+    );
+    if (!isPasswordValid) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 

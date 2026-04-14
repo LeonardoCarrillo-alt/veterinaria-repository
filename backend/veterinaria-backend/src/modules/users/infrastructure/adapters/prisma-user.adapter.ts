@@ -20,7 +20,7 @@ export class PrismaUserAdapter implements UserRepositoryPort {
   constructor(private readonly prisma: PrismaService) {}
 
   async save(user: User): Promise<User> {
-    const prismaUser = await this.prisma.user.create({
+    const prismaUser = (await this.prisma.user.create({
       data: {
         email: user.getEmail().getEmail(),
         username: user.getUsername(),
@@ -29,29 +29,29 @@ export class PrismaUserAdapter implements UserRepositoryPort {
         createdAt: user.getCreatedAt(),
         updatedAt: user.getUpdatedAt(),
       },
-    });
+    })) as PrismaUser;
 
     return this.mapToDomain(prismaUser);
   }
 
   async findById(id: UserId): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({
+    const user = (await this.prisma.user.findUnique({
       where: { id: parseInt(id.getValue()) },
-    });
+    })) as PrismaUser | null;
 
     return user ? this.mapToDomain(user) : null;
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({
+    const user = (await this.prisma.user.findUnique({
       where: { email },
-    });
+    })) as PrismaUser | null;
 
     return user ? this.mapToDomain(user) : null;
   }
 
   async findAll(): Promise<User[]> {
-    const users = await this.prisma.user.findMany();
+    const users = (await this.prisma.user.findMany()) as PrismaUser[];
     return users.map((user) => this.mapToDomain(user));
   }
 
