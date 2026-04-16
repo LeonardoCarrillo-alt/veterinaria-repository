@@ -1,28 +1,61 @@
 import Dashboard from '../components/dashboard.tsx';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Product from '../components/products.tsx';
 import backgroundImage from '../assets/images.png';
+import ProductModal from '../components/ProductModal';
 
 function DashboardPage() {
+    const [showModal, setShowModal] = useState(false);
+    const [products, setProducts] = useState<any[]>([]);
+
+    const fetchProducts = async () => {
+        try {
+            const res = await fetch("http://localhost:5004/products");
+            const data = await res.json();
+            setProducts(data);
+        } catch (error) {
+            console.error("Error al cargar productos", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
     return (
-        <div style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundColor: '#07dee9',
-            backgroundSize: '50%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            minHeight: '100vh',
-            width: '100%'
-        }}>
-            <Dashboard />
+        <div
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundColor: '#07dee9',
+                backgroundSize: '50%',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                minHeight: '100vh',
+                width: '100%'
+            }}
+        >
+            <Dashboard onCreateProduct={() => setShowModal(true)} />
 
             <div>
-                <Product id={1} name="Producto 1" description="Descripción del producto 1" price={100} />
-                <Product id={2} name="Producto 2" description="Descripción del producto 2" price={200} />
-                <Product id={3} name="Producto 3" description="Descripción del producto 3" price={300} />   
+                {products.map((p) => (
+                    <Product
+                        key={p.id}
+                        id={p.id}
+                        name={p.name}
+                        description={p.description}
+                        price={p.price}
+                    />
+                ))}
             </div>
+
+            {showModal && (
+                <ProductModal
+                    onClose={() => setShowModal(false)}
+                    onProductCreated={fetchProducts}
+                />
+            )}
         </div>
-    )
-};
+    );
+}
 
 export default DashboardPage;
