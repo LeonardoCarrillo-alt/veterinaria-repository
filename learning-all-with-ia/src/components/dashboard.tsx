@@ -2,7 +2,7 @@ import './dashboard.css';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-export default function Dashboard() {
+export default function Dashboard({ onCreateProduct }: any) {
     const { user, isAuthenticated, logout } = useAuth();
     const navigate = useNavigate();
     const handleInfoClick = () => {
@@ -39,6 +39,10 @@ export default function Dashboard() {
                     <button className="card">
                         <h2>tu asistente veterinario</h2>
                         <p>chatea con tu asistente veterinario para obtener ayuda sobre tus mascotas</p>
+                    </button>
+                    <button className="card" onClick={onCreateProduct}>
+                        <h2>Crear Producto</h2>
+                        <p>Crea un producto</p>
                     </button>
                 </div>
             </div>
